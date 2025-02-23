@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { IoAddCircle, IoHomeOutline } from 'react-icons/io5';
-import { MdDensitySmall } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Providers/AuthProvider';
 import { UseTheme } from '../Hooks/UseTheme';
@@ -9,6 +8,7 @@ import { IoSunny, IoMoon } from "react-icons/io5";
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
   const { changeTheme, mode } = UseTheme();
+ 
   const handleSignOut = async () => {
     try {
       await signOutUser();
@@ -17,8 +17,9 @@ const Navbar = () => {
     }
   };
   return (
-    <div className="w-11/12 mx-auto">
-      <div className="navbar bg-base-100">
+    <div className="dark:bg-slate-600">
+      <div className="w-full md:w-11/12 mx-auto">
+      <div className="navbar bg-base-100 dark:bg-slate-600 dark:text-white ">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -38,19 +39,17 @@ const Navbar = () => {
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-              <li><a>Item 1</a></li>
-
-              <li><a>Item 3</a></li>
+             <li><Link to="/home"><IoHomeOutline /> Home</Link></li>
+             <li><Link to="/home/add-task"><IoAddCircle /> Add Task</Link></li>
             </ul>
           </div>
           <a className="btn btn-ghost text-xl">TaskPilot</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-          <li><Link to="/home"><IoHomeOutline /> Home</Link></li>
-          <li><Link to="/home/add-task"><IoAddCircle /> Add Task</Link></li>
-            <li><Link><MdDensitySmall />All Task </Link></li>
-
+          <li><Link to="/task-manager"><IoHomeOutline /> Task Manager</Link></li>
+          <li><Link to="/task-manager/add-task"><IoAddCircle /> Add Task</Link></li>
+          
 
 
           </ul>
@@ -59,30 +58,23 @@ const Navbar = () => {
           <button onClick={changeTheme} aria-label="Toggle Theme" className="btn btn-ghost">
             {mode === "light" ? <IoSunny /> : <IoMoon />}
           </button>
-          {user ? (
-            <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4">
               <div className="dropdown dropdown-bottom">
                 <div tabIndex={0}>
                   <img
-                    src={user.photoURL || "/default-avatar.png"}
+                    src={user?.photoURL || "/default-avatar.png"}
                     alt="Profile"
                     className="w-8 h-8 rounded-full"
                   />
                 </div>
                
               </div>
-              <Tooltip id="user-tooltip" className="bg-gray-700 text-white p-2 rounded" />
-              <button onClick={handleSignOut} className="btn bg-[#137257] text-white">Logout</button>
+              
+              <button onClick={handleSignOut} className="btn">Logout</button>
             </div>
-          ) : (
-            <div className="flex space-x-3 items-center">
-              <Link to="/SignIn">Sign In</Link>
-              <span>|</span>
-              <Link to="/SignUp">Register</Link>
-            </div>
-          )}
         </div>
       </div>
+    </div>
     </div>
   );
 };

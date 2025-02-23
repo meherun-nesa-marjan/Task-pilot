@@ -26,7 +26,7 @@ const NotFound = () => {
         {/* Button with hover effect */}
         <div className="mt-8">
           <Link
-            to="/"
+            to="/task-manager"
             className="px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg shadow-lg hover:scale-105 transform hover:shadow-2xl transition-transform duration-300"
           >
             Go Back Home

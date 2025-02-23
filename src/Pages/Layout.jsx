@@ -7,10 +7,10 @@ const  Layout= () => {
     const navigate = useNavigate();
     return (
         
-            user ? (
-                navigate('/Home')
+        user ? (
+                navigate('/task-manager')
         ) : (
-            navigate('/login')
+            navigate('/')
         )
       
     );

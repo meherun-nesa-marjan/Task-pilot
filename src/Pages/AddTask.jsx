@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { AuthContext } from '../Providers/AuthProvider';
 const AddTask = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("To-Do");
-  
- 
+     const { user } = useContext(AuthContext);
+
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -34,10 +35,15 @@ const AddTask = () => {
         description,
         category,
         timestamp: new Date().toLocaleString(),
+        name: user?.displayName,
+        email:user?.email,
+
+
+
       };
     
       try {
-        const response = await fetch("http://localhost:5000/tasks", {
+        const response = await fetch("https://task-app-server-ashen.vercel.app/tasks", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -129,7 +135,7 @@ const AddTask = () => {
           </div>
   
           {/* Submit Button */}
-          <button type="submit" className="py-3 rounded border-2 w-full">
+          <button type="submit" className="py-3 dark:text-white rounded border-2 w-full">
             Add Task
           </button>
         </form>

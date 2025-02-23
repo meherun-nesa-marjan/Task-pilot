@@ -20,7 +20,7 @@ const Login = () => {
       signInUser(email, password)
         .then(() => {
           e.target.reset();
-          navigate("/");
+          navigate("/task-manager");
           Swal.fire({
             icon: "success",
             title: "Login successful!",
@@ -42,7 +42,7 @@ const Login = () => {
       signInWithGoogle()
         .then(() => {
          
-            navigate("/");
+            navigate("/task-manager");
           Swal.fire({
             icon: "success",
             title: "Login successful with Google!",
@@ -126,7 +126,7 @@ const Login = () => {
                                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                     Don’t have an account?{" "}
                                     <Link
-                                        to={"/Registration"}
+                                        to={"/registration"}
                                         className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                                     >
                                         Register here
